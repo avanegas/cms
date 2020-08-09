@@ -2,6 +2,7 @@
 
 use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -83,7 +84,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Post::class, 40)->create()->each(function ($post) {
 
             $post->image()->save(factory(App\Image::class)->make());
-            $post->tags()->attach($this->array(rand(1,20)));
+            //$post->tags()->attach($this->array(rand(1,20)));
 
             $number_comments = rand(1, 6);
 
