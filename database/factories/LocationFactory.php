@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
-use App\Image;
+use App\Location;
 
-$factory->define(Image::class, function (Faker $faker) {
+$factory->define(Location::class, function (Faker $faker) {
     return [
-        'url' => 'test.png',
+        'country' => $faker->country,
     ];
 });

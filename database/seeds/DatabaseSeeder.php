@@ -8,6 +8,38 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        // Group Users
+        factory(App\Group::class)->create(['name'  => 'ND']);
+        factory(App\Group::class)->create(['name'  => 'ARQUITECTO']);
+        factory(App\Group::class)->create(['name'  => 'INGENIERO']);
+        factory(App\Group::class)->create(['name'  => 'ESPECIALISTA']);
+        factory(App\Group::class)->create(['name'  => 'OBRERO']);
+        factory(App\Group::class)->create(['name'  => 'PROFESIONAL']);
+        factory(App\Group::class)->create(['name'  => 'PROVEEDOR']);
+
+        // Page to visit
+        App\Page::create([
+            'parent_id' => null,
+            'title'     => 'Quines somos',
+            'slug'      => 'quienes-somos',
+            'body'      => 'Contenido de quienes somos'
+        ]);
+
+        App\Page::create([
+            'parent_id' => 1,
+            'title'     => 'Misión',
+            'slug'      => 'mision',
+            'body'      => 'Contenido de mision'
+        ]);
+
+        App\Page::create([
+            'parent_id' => 1,
+            'title'     => 'Visión',
+            'slug'      => 'vision',
+            'body'      => 'Contenido de vision'
+        ]);
+
+
         // $this->call(UserSeeder::class);
 
         // Users
@@ -19,9 +51,9 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
         //$user->roles()->attach($role_admin);
-        //$profile = $user->profile()->save(factory(App\Profile::class)->make());
-        //$profile->location()->save(factory(App\Location::class)->make());
-        //$user->groups()->attach($this->array(rand(1,7)));
+        $profile = $user->profile()->save(factory(App\Profile::class)->make());
+        $profile->location()->save(factory(App\Location::class)->make());
+        $user->groups()->attach($this->array(rand(1,7)));
         $user->image()->save(factory(App\Image::class)->make([
             'url' => 'persona-00.jpeg'
         ]));
@@ -29,9 +61,9 @@ class DatabaseSeeder extends Seeder
         $users = factory(App\User::class,9)->create();
         foreach($users as $user){
             //$user->assignRole('user');
-            //$profile = $user->profile()->save(factory(App\Profile::class)->make());
-            //$profile->location()->save(factory(App\Location::class)->make());
-            //$user->groups()->attach($this->array(rand(1,7)));
+            $profile = $user->profile()->save(factory(App\Profile::class)->make());
+            $profile->location()->save(factory(App\Location::class)->make());
+            $user->groups()->attach($this->array(rand(1,7)));
             $user->image()->save(factory(App\Image::class)->make([
                 'url' => 'profile.png'
             ]));
@@ -49,7 +81,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Category::class)->create(['name'  => 'Materiales para acabados con Madera, Hierro y aluminio, etc.', 'slug' => 'materiales-para-acabados-de-madera-Hierro-y-aluminio']);
         factory(App\Category::class)->create(['name'  => 'Diseño hidráulico y sanitario', 'slug' => 'diseno-hidraulico-y-sanitario']);
         factory(App\Category::class)->create(['name'  => 'Material para acabados de pisos y paredes', 'slug' => 'material-para-acabados-de-pisos-y-paredes']);
-        //factory(App\Models\Post\Category::class, 10)->create();
+        //factory(App\Category::class, 10)->create();
 
         // Tags
         factory(App\Tag::class)->create(['name'  => 'Arquitectura', 'slug' => 'arquitectura']);
@@ -72,7 +104,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Tag::class)->create(['name'  => 'Hierro', 'slug' => 'hierro']);
         factory(App\Tag::class)->create(['name'  => 'Suelda', 'slug' => 'suelda']);
         factory(App\Tag::class)->create(['name'  => 'Aluminio', 'slug' => 'aluminio']);
-         //factory(App\Models\Post\Tag::class, 20)->create();
+         //factory(App\Tag::class, 20)->create();
 
         //Posts
         factory(App\Post::class, 40)->create()->each(function ($post) {
