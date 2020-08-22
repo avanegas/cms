@@ -2,20 +2,14 @@
 
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
         // $this->call(UserSeeder::class);
-        
+
         // Users
         $user = App\User::create([
             'name'       => 'Angel Vanegas',
@@ -41,7 +35,7 @@ class DatabaseSeeder extends Seeder
             $user->image()->save(factory(App\Image::class)->make([
                 'url' => 'profile.png'
             ]));
-        }        
+        }
 
         // Categories
         factory(App\Category::class)->create(['name'  => 'Arquitectura', 'slug' => 'arquitectura']);
@@ -79,12 +73,12 @@ class DatabaseSeeder extends Seeder
         factory(App\Tag::class)->create(['name'  => 'Suelda', 'slug' => 'suelda']);
         factory(App\Tag::class)->create(['name'  => 'Aluminio', 'slug' => 'aluminio']);
          //factory(App\Models\Post\Tag::class, 20)->create();
-         
+
         //Posts
         factory(App\Post::class, 40)->create()->each(function ($post) {
 
             $post->image()->save(factory(App\Image::class)->make());
-            //$post->tags()->attach($this->array(rand(1,20)));
+            $post->tags()->attach($this->array(rand(1,20)));
 
             $number_comments = rand(1, 6);
 
@@ -94,5 +88,14 @@ class DatabaseSeeder extends Seeder
 
         });
 
+    }
+
+    public function array($max)
+    {
+        $values = [];
+        for ($i=1; $i < $max; $i++) {
+            $values[] = $i;
+        }
+        return $values;
     }
 }
