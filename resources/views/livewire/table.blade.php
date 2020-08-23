@@ -13,7 +13,7 @@
 
             @foreach($posts as $post)
                 <div class="container">
-                    <div class="card mb-1 mt-1">
+                    <div class="card mb-1 mt-3">
                         <div class="card-header">
                             <p>Tema creado por, {{$post->user->name}}, el día<em> {{$post->created_at}}.</em></p>
                         </div>
@@ -31,5 +31,10 @@
                     </div>
                 </div>
             @endforeach
+            <div class="d-flex justify-content-center mt-3">
+                {{$posts->links()}}
+            </div>
+
         </div>
+
     </div>

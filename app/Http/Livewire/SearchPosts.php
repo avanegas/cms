@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Comment;
 use App\Category;
 use App\Image;
@@ -12,10 +13,12 @@ use App\User;
 
 class SearchPosts extends Component
 {
+    use WithPagination;
+
     public function render()
     {
         return view('livewire.search-posts', [
-          'posts'=>Post::with(['comments','user', 'category', 'tags', 'image'])->orderBy('id','desc')->paginate(8)
+          'posts'=>Post::with(['comments','user', 'category', 'tags', 'image'])->orderBy('id','desc')->paginate(4)
           ]);
     }
 }
